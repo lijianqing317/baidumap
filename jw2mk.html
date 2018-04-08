@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>百度经纬度转摩卡坐标</title>
+<meta name="description" content="点击" />
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+</head>
+<body>
+<div style="display:none;" id="container"></div>
+<div style="width:500px;height:270px;float:left;margin:0 0 0 10px;">
+    <p>经度x:<input type="text" value="108.95344" id="mctX" /></p>
+    <p>维度y:<input type="text" value="34.265657" id="mctY" /></p>
+    <p id="pointX"></p>
+    <p id="pointY"></p>
+    <p id="entertaiment"></p>
+    <p><input style="width:400px;height:80px;font-size:30px;" type="button" value="点击" onclick="mctGeo();" /></p>
+    <div id="panel"></div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+var map = new BMap.Map("container");
+
+function mctGeo(){
+    var mctXX = document.getElementById("mctX").value;
+    var mctYY = document.getElementById("mctY").value;    
+    //var mctXY = new BMap.Pixel(mctXX,mctYY);    
+    var mctXY = new BMap.Point(mctXX,mctYY);
+    var projection2 = map.getMapType().getProjection();
+   // var LngLat = projection2.pointToLngLat(mctXY);    
+    var mercatoPt = projection2.lngLatToPoint(mctXY);
+    document.getElementById("pointX").innerHTML = "摩卡x: " + mercatoPt.x;
+    document.getElementById("pointY").innerHTML = "摩卡y: " + mercatoPt.y;
+	
+}
+
+</script>
+<div style="clear:both;"></div>
